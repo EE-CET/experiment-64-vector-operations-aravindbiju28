@@ -3,46 +3,66 @@ import java.util.Vector;
 
 public class VectorOperations {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         Vector<String> students = new Vector<>();
-        
-        while (scanner.hasNextInt()) {
-            int choice = scanner.nextInt();
-            
-            if (choice == 5) {
-                break;
-            }
-            
+        int choice;
+
+        do {
+            System.out.println("\nMenu:");
+            System.out.println("1. Add a student name");
+            System.out.println("2. Insert a name at a specific index");
+            System.out.println("3. Remove a name");
+            System.out.println("4. Display the list");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            sc.nextLine(); // consume newline
+
             switch (choice) {
                 case 1:
-                    // TODO: Read the name and add it to the vector
-                    // Print "Added"
-                    
+                    System.out.print("Enter name to add: ");
+                    String nameToAdd = sc.nextLine();
+                    students.add(nameToAdd);
+                    System.out.println("Added");
                     break;
-                    
+
                 case 2:
-                    // TODO: Read the name and the 1-based index
-                    // Insert the name at the correct 0-based index in the vector
-                    // Print "Inserted"
-                    
+                    System.out.print("Enter name to insert: ");
+                    String nameToInsert = sc.nextLine();
+                    System.out.print("Enter index (1-based): ");
+                    int index = sc.nextInt();
+                    sc.nextLine();
+                    if (index >= 1 && index <= students.size() + 1) {
+                        students.add(index - 1, nameToInsert);
+                        System.out.println("Inserted");
+                    } else {
+                        System.out.println("Invalid index");
+                    }
                     break;
-                    
+
                 case 3:
-                    // TODO: Read the name and remove it from the vector
-                    // Print "Removed"
-                    
+                    System.out.print("Enter name to remove: ");
+                    String nameToRemove = sc.nextLine();
+                    if (students.remove(nameToRemove)) {
+                        System.out.println("Removed");
+                    } else {
+                        System.out.println("Name not found");
+                    }
                     break;
-                    
+
                 case 4:
-                    // TODO: Display the vector
-                    
+                    System.out.println(students);
                     break;
-                    
+
+                case 5:
+                    System.out.println("Exiting...");
+                    break;
+
                 default:
                     System.out.println("Invalid choice");
             }
-        }
-        
-        scanner.close();
+        } while (choice != 5);
+
+        sc.close();
     }
 }
